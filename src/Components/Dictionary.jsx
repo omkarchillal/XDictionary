@@ -8,8 +8,7 @@ const Dictionary = () => {
   ]);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [definition, setDefinition] = useState(null);
-  const [notFound, setNotFound] = useState(false);
+  const [definition, setDefinition] = useState("");
 
   const handleSearch = () => {
     const found = dictionary.find(
@@ -18,10 +17,8 @@ const Dictionary = () => {
 
     if (found) {
       setDefinition(found.meaning);
-      setNotFound(false);
     } else {
-      setDefinition(null);
-      setNotFound(true);
+      setDefinition("Word not found in the dictionary.");
     }
   };
 
@@ -30,7 +27,7 @@ const Dictionary = () => {
       <h1>Dictionary App</h1>
       <input
         type="text"
-        placeholder="Enter a word"
+        placeholder="Search for a word..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         style={{ padding: "10px", fontSize: "16px", width: "250px" }}
@@ -41,14 +38,10 @@ const Dictionary = () => {
         Search
       </button>
 
-      {definition !== null && !notFound && (
-        <div style={{ marginTop: "20px" }}>
-          <h3>Definition:</h3>
-          <p>{definition}</p>
-        </div>
-      )}
-
-      {notFound && <div style={{ marginTop: "20px" }}>Word not found in the dictionary.</div>}
+      <div style={{ marginTop: "20px" }}>
+        <h3>Definition:</h3>
+        <p>{definition}</p>
+      </div>
     </div>
   );
 };
